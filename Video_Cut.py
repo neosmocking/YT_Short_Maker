@@ -140,9 +140,9 @@ def choose_mode():
     mode = simpledialog.askstring(
         "Pilih Mode",
         "Masukkan nomor mode:\n"
-        "1 - Download full video YouTube\n"
-        "2 - Cut video YouTube\n"
-        "3 - Cut video offline"
+        "1 - Download Full Video YouTube\n"
+        "2 - Potong Video dari YouTube\n"
+        "3 - Potong Video Offline"
     )
     if not mode or mode.strip() not in {"1", "2", "3"}:
         raise RuntimeError("Mode tidak valid.")
@@ -167,13 +167,13 @@ def main():
                 raise RuntimeError("URL tidak diisi.")
             txt_file = pick_txt_file()
             cut_youtube(url, txt_file, output_dir)
-            messagebox.showinfo("Selesai", "Cut video YouTube selesai.")
+            messagebox.showinfo("Selesai", "Potong Video YouTube selesai.")
 
         elif mode == "3":
             video_file = pick_video_file()
             txt_file = pick_txt_file()
             cut_offline_video(video_file, txt_file, output_dir)
-            messagebox.showinfo("Selesai", "Cut video offline selesai.")
+            messagebox.showinfo("Selesai", "Potong Video offline selesai.")
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
