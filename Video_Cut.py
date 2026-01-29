@@ -39,7 +39,7 @@ def pick_video_file():
     root.withdraw()
     file_path = filedialog.askopenfilename(
         title="Pilih file video offline",
-        filetypes=[("Video files", "*.mp4 *.mkv *.mov *.avi *.webm")]
+        filetypes=[("Video files", "*.mp4 *.mkv *.mov *.avi *.webm *.ts")]
     )
     if not file_path:
         raise RuntimeError("File video tidak dipilih.")
