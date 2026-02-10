@@ -112,6 +112,31 @@ def cut_youtube(url: str, txt_file: Path, output_dir: Path):
         ]
         subprocess.run(cmd, check=True)
 
+def parse_cuts(txt_file: Path):
+    cuts = []
+    dash_pattern = re.compile(r"\s*[-–—]\s*")  # -, en dash, em dash
+
+    with txt_file.open("r", encoding="utf-8") as f:
+        for i, line in enumerate(f, start=1):
+            line = line.strip()
+            if not line:
+                continue
+
+            parts = dash_pattern.split(line)
+            if len(parts) != 2:
+                raise ValueError(
+                    f"Format salah di baris {i}: gunakan format 00:00:00 - 00:00:00"
+                )
+
+            start, end = parts
+            cuts.append((start, end))
+
+    if not cuts:
+        raise ValueError("File TXT kosong atau format tidak valid.")
+
+    return cuts
+
+
 
 def cut_offline_video(video_file: Path, txt_file: Path, output_dir: Path):
     cuts = parse_cuts(txt_file)
